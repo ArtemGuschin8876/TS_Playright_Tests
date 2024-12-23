@@ -1,4 +1,4 @@
-name: CI 
+name: CI
 
 on:
   push:
@@ -25,20 +25,18 @@ jobs:
       run: 
         docker build -t playwright-tests .
 
-    - name: Run tests in Docker
-      run: 
-        docker run --rm playwright-tests
-    
-    - name: Generate Playwright HTML report
+    - name: Run tests in Docker and generate Playwright HTML report
       run: |
-        docker run --rm playwright-tests npx playwright test --reporter=html
+        # Создание отчетов в папке 'playwright-report'
+        docker run --rm playwright-tests npx playwright test --reporter=html --output=playwright-report
 
     - name: Deploy Playwright Report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GH_TOKEN }}
-        publish_dir: ./playwright-report  
-        publish_branch: gh-pages
+        publish_dir: ./playwright-report 
+        publish_branch: gh-pages  
+
     - name: Show git status before deployment
       run: |
         git status

@@ -39,3 +39,11 @@ jobs:
         github_token: ${{ secrets.GH_TOKEN }}
         publish_dir: ./playwright-report  
         publish_branch: gh-pages
+    - name: Show git status before deployment
+      run: |
+        git status
+        git log -n 1
+
+    - name: Show files after deployment
+      run: |
+        git ls-tree -r gh-pages --name-only

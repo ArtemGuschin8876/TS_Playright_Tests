@@ -28,3 +28,14 @@ jobs:
     - name: Run tests in Docker
       run: 
         docker run --rm playwright-tests
+    
+    - name: Generate Playwright HTML report
+      run: |
+        docker run --rm playwright-tests npx playwright test --reporter=html
+
+    - name: Deploy Playwright Report to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        folder: playwright-report  
+        personal_token: ${{ secrets.GITHUB_TOKEN }}  
+        branch: gh-pages 

@@ -6,7 +6,10 @@ COPY package*.json ./
 
 RUN npm install
 
+RUN npm install @playwright/test
+
 RUN npx playwright install msedge
+
 
 COPY . .
 

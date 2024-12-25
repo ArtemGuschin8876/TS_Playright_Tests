@@ -24,16 +24,16 @@ jobs:
     - name: Build Docker image
       run: docker build -t playwright-tests .
 
-    - name: Run tests in Docker
-      run: docker run --rm playwright-tests
-      
-    - name: Generate Playwright HTML report
-      run: 
-          docker run --rm playwright-tests npx playwright test --reporter=html --output=playwright-report
+    - name: Print current directory
+      run: pwd
 
-    - name: List generated files
-      run: ls -l ./playwright-report
+    - name: List files in the container
+      run: ls -l
 
+    - name: Run Playwright tests and generate report
+      run: |
+        npx playwright test --reporter=html --output=playwright-report
+        ls -l ./playwright-report
 
     - name: Deploy Playwright Report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
@@ -42,4 +42,3 @@ jobs:
         publish_dir: ./playwright-report  
         publish_branch: gh-pages
         keep_files: true
-      

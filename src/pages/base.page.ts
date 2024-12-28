@@ -5,7 +5,6 @@ export abstract class BasePage {
 
     private baseUrl = 'https://www.globalsqa.com/angularJs-protractor/BankingProject/#';
 
-    
     protected async goto(url: string) {
         await this.page.goto(url)
     }

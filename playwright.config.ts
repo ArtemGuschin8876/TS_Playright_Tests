@@ -42,6 +42,10 @@ export default defineConfig({
       name: 'API tests',
       testDir: './api/tests'
     },
+    {
+      name: 'Heroku tests',
+      testDir: './the-internet-exercises/tests'
+    },
     // {
     //   name: 'chromium',
     //   use: { ...devices['Desktop Chrome'] },

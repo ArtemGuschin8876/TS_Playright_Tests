@@ -10,7 +10,7 @@ export class AddRemovePage extends BasePageHeroku {
        await this.openPage(this.url)
     }
 
-    async clickButtonAndCheckVisibility() {
+    async clickButtonAddElementAndCheckVisibility() {
         await this.buttonAddElement.isVisible();
         await this.buttonAddElement.click();
     }
@@ -18,4 +18,10 @@ export class AddRemovePage extends BasePageHeroku {
     async checkButtonDeleteIsVsisble() {
         await this.buttonDelete.isVisible();
     }
+
+    async clickButtonDeleteAndCheckIsNotVisibility() {
+        await this.buttonDelete.click();
+        await this.buttonDelete.isHidden();
+    }
+
 }

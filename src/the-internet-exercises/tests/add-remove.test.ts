@@ -1,5 +1,4 @@
 import { test } from '@playwright/test';
-import { BasePageHeroku } from '../pages/base.heroku.page';
 import { AddRemovePage } from '../pages/add-remove.page';
 
 
@@ -7,12 +6,18 @@ let addRemovePage: AddRemovePage
 
 test.beforeEach(async ({ page }) => {
     addRemovePage = new AddRemovePage(page);
+    await addRemovePage.open()
 })
 
 
-//ID: UI_01
-test('Проверка кнопки "Add element',  async () => {
+//ID: AR_01
+test('Проверка кнопки "Add element"',  async () => {
+    await addRemovePage.clickButtonAddElementAndCheckVisibility();
+})
 
-    await addRemovePage.open()
-    await addRemovePage.clickButtonAndCheckVisibility()
+//ID: AR_02
+test('Проверка кнопки "Delete"', async () => {
+    await addRemovePage.clickButtonAddElementAndCheckVisibility();
+    await addRemovePage.checkButtonDeleteIsVsisble();
+    await addRemovePage.clickButtonDeleteAndCheckIsNotVisibility();
 })

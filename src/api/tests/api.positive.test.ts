@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { UserAPI } from '../api.user';
 import { userByIdData, testDataEmails, postData } from '../data/user.data';
-import exp from 'constants';
+import { PostDataDTO } from '../data/user.dto';
 
 test.describe('API tests positive', () => {
 
@@ -32,6 +32,7 @@ test.beforeEach(async ({ request }) => {
 */
 testDataEmails.forEach(({ id, email }) => {
     test(`GET users list JSON data user with id: ${id}`, async () => {
+
         const response = await userAPI.getUsersList();
         expect(response.status()).toBe(200);
 
@@ -59,6 +60,8 @@ testDataEmails.forEach(({ id, email }) => {
       
         expect(responseData.id).toBeDefined();
         expect(responseData.createdAt).toBeDefined();
+
+
     });
 
 /*

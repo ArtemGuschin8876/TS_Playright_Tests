@@ -2,22 +2,34 @@ import { expect, Page } from "@playwright/test";
 import { BasePageHeroku } from "./base.heroku.page";
 
 
+export interface AuthCredentials {
+    username: string;
+    password: string;
+}
+
 export class BasicAuthPage extends BasePageHeroku {
+
+    private credentials: AuthCredentials;
 
     private url = this.getLink('basic_auth');
 
-    private username = 'admin';
-    private password = 'admin';
 
     private title = this.page.locator('div.example p');
     private titleText = 'Congratulations! You must have the proper credentials.'
- 
+
     async open() {
-       await this.openPage(this.url)
+        await this.openPage(this.url)
+    }
+
+    setCredentials(credentials:AuthCredentials) {
+        this.credentials = credentials;
     }
 
     async createAuthHeader() {
-        return 'Basic ' + btoa(this.username + ':' + this.password);
+        if (!this.credentials) {
+            throw new Error('Credentials are not set');
+        }
+        return 'Basic ' + btoa(this.credentials.username + ':' + this.credentials.password);
     }
 
     async setHttpHeader() {
